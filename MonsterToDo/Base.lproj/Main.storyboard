@@ -72,7 +72,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h7M-aH-lvm">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h7M-aH-lvm">
                                         <rect key="frame" x="119" y="0.0" width="230" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="230" id="vyo-0f-P7h"/>
@@ -91,7 +91,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6eJ-Fo-JnD">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6eJ-Fo-JnD">
                                         <rect key="frame" x="119" y="0.0" width="230" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="230" id="gw6-34-ReV"/>
@@ -116,7 +116,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZAL-RW-LUZ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZAL-RW-LUZ">
                                         <rect key="frame" x="119" y="0.0" width="230" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="230" id="Zz7-SI-n50"/>
@@ -132,7 +132,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-u7-dQy">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-u7-dQy">
                                 <rect key="frame" x="144" y="430" width="230" height="80"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -153,7 +153,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="save" destination="8H0-M4-Lgk" eventType="touchUpInside" id="QXR-TI-JZg"/>
+                                    <action selector="save" destination="8H0-M4-Lgk" eventType="touchUpInside" id="NtW-br-qGE"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AQK-Fb-I8s">
@@ -165,7 +165,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDi-jH-HVd">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDi-jH-HVd">
                                         <rect key="frame" x="119" y="0.0" width="230" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="230" id="mah-OZ-Km2"/>
@@ -225,6 +225,7 @@
                         <outlet property="levelTextField" destination="lDi-jH-HVd" id="ExB-Cz-8Kf"/>
                         <outlet property="memoTextView" destination="C1V-u7-dQy" id="J7x-Ap-6gl"/>
                         <outlet property="questTextField" destination="h7M-aH-lvm" id="3il-T3-ByT"/>
+                        <outlet property="saveTask" destination="iFH-JB-28A" id="jnm-3U-8Jj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fS-Fs-875" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -385,7 +386,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zUz-Ax-QTW">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zUz-Ax-QTW">
                                 <rect key="frame" x="60" y="536" width="294" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -446,6 +447,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="saveButton" destination="dMV-3r-dCo" id="rg5-xZ-NRJ"/>
                         <outlet property="userImageView" destination="tnL-dy-mKW" id="IEE-Da-HfO"/>
                         <outlet property="userNameTextField" destination="zUz-Ax-QTW" id="gb2-vw-v58"/>
                     </connections>

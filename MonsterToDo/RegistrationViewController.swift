@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPickerViewDelegate, UIPickerViewDataSource {
+class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
     
     
     @IBOutlet var questTextField: UITextField!
@@ -15,6 +15,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     @IBOutlet var levelTextField: UITextField!
     @IBOutlet var dateTextField: UITextField!
     @IBOutlet var memoTextView: UITextView!
+    @IBOutlet var saveTask: UIButton!
     
     var genrePickerView: UIPickerView = UIPickerView()
     var levelPickerView: UIPickerView = UIPickerView()
@@ -32,8 +33,12 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         questTextField.delegate = self
+        genreTextField.delegate = self
+        levelTextField.delegate = self
+        dateTextField.delegate = self
+        memoTextView.delegate = self
+        saveTask.isEnabled = false
         
         //日付のpicker
         setupToolbar()
@@ -41,6 +46,11 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         createPickerView()
         //textViewのキーボード非表示機能
         textViewshouldDone()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setUpNotificationForTextField()
     }
     
 //MARK: - 日付のpicker設定
@@ -69,7 +79,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         //決定バーの生成
         let genreToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         let genreSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let genreDoneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        let genreDoneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(genreDone))
         genreToolbar.setItems([genreSpaceItem, genreDoneItem], animated: true)
         
         //インプットビュー設定
@@ -84,7 +94,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         //決定バーの生成
         let levelToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         let levelSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let levelDoneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        let levelDoneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(levelDone))
         levelToolbar.setItems([levelSpaceItem, levelDoneItem], animated: true)
         
         //インプットビュー設定
@@ -93,9 +103,14 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     }
     
     //MARK: - picker終了
-    @objc func done(){
+    @objc func genreDone(){
         genreTextField.endEditing(true)
+        genreTextField.text = "\(genreList[genrePickerView.selectedRow(inComponent: 0)])"
+    }
+    
+    @objc func levelDone(){
         levelTextField.endEditing(true)
+        levelTextField.text = "\(levelList[levelPickerView.selectedRow(inComponent: 0)])"
     }
     
     //日付picker終了
@@ -153,6 +168,33 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         }
     }
     
+//MARK: - キーボードが隠れないようにする
+    func setUpNotificationForTextField() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillShowNotification(_:)), name: UIResponder.keyboardWillChangeFrameNotification , object: nil)
+        notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillHideNotification(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc private func handleKeyboardWillShowNotification(_ notification: Notification) {
+        let userInfo = notification.userInfo //この中にキーボードの情報がある
+        let keyboardSize = (userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardY = self.view.frame.size.height - keyboardSize.height //画面全体の高さ - キーボードの高さ = キーボードが被らない高さ
+        let editingTextFieldY: CGFloat = (self.memoTextView?.frame.origin.y)!
+        if editingTextFieldY > keyboardY - 60 {
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
+                self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY - (keyboardY - 60)), width: self.view.bounds.width, height: self.view.bounds.height)
+            }, completion: nil)
+            
+        }
+    }
+    
+    @objc private func handleKeyboardWillHideNotification(_ notification: Notification) {
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+    }
+    
+    
     //MARK: - ボタン
     @IBAction func save(){
         
@@ -179,7 +221,6 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         //todoMonster.append(monsterImage)
         
         
-        
         //userDefaultsに書込
         saveDate.set(todoQuest, forKey: "quest")
         saveDate.set(todoGenre, forKey: "genre")
@@ -195,10 +236,17 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         print()
     }
     
-    
-    
+
     @IBAction func cancel(){
         self.dismiss(animated: true, completion: nil)
+    }
+
+//MARK: - ボタン効果
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01){
+            self.saveTask.isEnabled = !(self.questTextField.text?.isEmpty ?? true)
+        }
+        return true
     }
     
     //MARK: - キーボード非表示機能

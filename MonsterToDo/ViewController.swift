@@ -128,7 +128,6 @@ class ViewController: UIViewController, UITableViewDataSource {
         let cancelAction = UIAlertAction(title: "苦戦中...", style: .cancel, handler: nil)
         
         
-        
         //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
         let okAction = UIAlertAction(title: "任務完了", style: .default, handler: {(action: UIAlertAction!) in
             todoQuest.remove(at: indexPath.row)

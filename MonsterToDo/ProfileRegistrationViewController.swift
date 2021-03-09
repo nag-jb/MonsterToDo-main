@@ -11,7 +11,7 @@ class ProfileRegistrationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var userNameTextField: UITextField!
-    
+    @IBOutlet var saveButton: UIButton!
     
     
     var saveData: UserDefaults = UserDefaults.standard
@@ -26,6 +26,9 @@ class ProfileRegistrationViewController: UIViewController, UITextFieldDelegate {
         userImageView.image = UIImage(named: "heroMan.png")
         
         userNameTextField.delegate = self
+        userNameTextField.text = ""
+        saveButton.isEnabled = false
+        
 
         // Do any additional setup after loading the view.
     }
@@ -78,6 +81,14 @@ class ProfileRegistrationViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Returnボタンでキーボード非表示
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+
+//MARK: - 名前が未入力の場合はボタンを押せない
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01){
+            self.saveButton.isEnabled = !(self.userNameTextField.text?.isEmpty ?? true)
+        }
         return true
     }
     

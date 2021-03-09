@@ -9,15 +9,18 @@ import UIKit
 
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var colletctionViewFlowLayout: UICollectionViewFlowLayout!
+    //プロフィール
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var userName: UILabel!
     @IBOutlet var userExp: UILabel!
     
+    //図鑑
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var colletctionViewFlowLayout: UICollectionViewFlowLayout!
+    
+    
     let image = ["monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg"]
     
-    let hero = ["heroMan.png", "heroWoman.png"]
     
     
 //MARK: - ロード時に呼び出される処理
@@ -26,7 +29,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         collectionView.dataSource = self
         
-        //プロフィールの表示
         userImageView.image = UIImage(named: "heroMan.png")
         
         
@@ -45,6 +47,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewDidAppear(animated)
         if let _ = UserDefaults.standard.object(forKey: "userName") as? String{
             userName.text = (UserDefaults.standard.object(forKey: "userName") as! String)
+        }
+        if UserDefaults.standard.object(forKey: "userImage") != nil {
+            let photoData = (UserDefaults.standard.data(forKey: "userImage"))
+            userImageView.image = UIImage(data: photoData! as Data)
         }
     }
     

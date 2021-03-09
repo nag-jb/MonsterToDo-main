@@ -70,6 +70,12 @@ class ViewController: UIViewController, UITableViewDataSource {
     //ID付きのセルを取得し、セル付属のLabelやImageViewに値を代入
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "questCell", for: indexPath) as! ToDoTableViewCell
+        cell.fightButton.addTarget(self, action: #selector(ViewController.fight(_:)), for: .touchUpInside)
+        
+        
+        //ボタンにタグを設定
+        cell.fightButton.tag = indexPath.row
+        
         
         cell.questLabel.text = todoQuest[indexPath.row]
         cell.dateLabel.text = todoDate[indexPath.row]
@@ -82,6 +88,11 @@ class ViewController: UIViewController, UITableViewDataSource {
         print(todoMemo)
         
         return cell
+    }
+    
+    
+    func configureTableView(){
+        table.rowHeight = 70
     }
     
     //MARK: -スワイプしたセルの削除
@@ -101,30 +112,25 @@ class ViewController: UIViewController, UITableViewDataSource {
         print(todoDate)
     }
     
-    
-    
-    func configureTableView(){
-        table.rowHeight = 70
+    //MARK: - タスク完了アクション
+    //タスクの完了を設定
+    @IBAction func fight(_ sender: UIButton){
+        
+        print("pushed Button")
+        
+        //アラートコントローラ：タイトル、メッセージ、アラートスタイルを設定
+        let alertController = UIAlertController(title: "モンスターと戦う", message: "タスクを完了しましたか？", preferredStyle: .alert)
+        
+        //アクション：ボタンの文字、ボタンスタイル、ボタンを押した時の処理を設定
+        let cancelAction = UIAlertAction(title: "苦戦中...", style: .cancel, handler: nil)
+        
+        let okAction = UIAlertAction(title: "任務完了", style: .default, handler: {action in print("wow")})
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
-    
-    //    //ID付きのセルを取得し、セル付属のLabelやImageViewに値を代入
-    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-    //        //変数を作成
-    //        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! reTableViewCell
-    //
-    //        cell.titleLabel.text = todoQuest[indexPath.row]
-    //        cell.titleLabel.text = todoGenre[indexPath.row]
-    //        cell.dateLabel.text = todoLevel[indexPath.row]
-    //        cell.dateLabel.text = todoDate[indexPath.row]
-    //
-    //        //変数の中身を作成、セルにToDo項目と日付を表示
-    //        //cell.textLabel?.text = todoTitle[indexPath.row] + todoDate[indexPath.row]
-    //
-    //        print("d")
-    //
-    //        return cell
-    //    }
-
 
 }
 

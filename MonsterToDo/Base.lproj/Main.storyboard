@@ -357,7 +357,7 @@
                         <outlet property="collectionView" destination="FGT-PE-jGl" id="JRv-iY-pDN"/>
                         <outlet property="colletctionViewFlowLayout" destination="KGB-XY-hLG" id="8US-d3-ISW"/>
                         <outlet property="userExp" destination="D5R-2Q-pxi" id="Inq-MS-FNA"/>
-                        <outlet property="userImageView" destination="cBh-bI-Diq" id="2nL-Hm-Zi4"/>
+                        <outlet property="userImageView" destination="cBh-bI-Diq" id="nbb-zX-Zfo"/>
                         <outlet property="userName" destination="sFk-MC-0DF" id="IrG-h5-o6H"/>
                     </connections>
                 </viewController>
@@ -373,14 +373,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あなたの名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-v8-tUO">
-                                <rect key="frame" x="155" y="505" width="104" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あなたの名前" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeO-v8-tUO">
+                                <rect key="frame" x="100" y="505" width="214" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あなたの画像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgi-nb-FdH">
-                                <rect key="frame" x="155" y="124" width="104" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あなたの画像" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgi-nb-FdH">
+                                <rect key="frame" x="100" y="124" width="214" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -405,7 +405,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="change" destination="emO-c3-Pd2" eventType="touchUpInside" id="k3W-Sr-U3h"/>
+                                    <action selector="change" destination="emO-c3-Pd2" eventType="touchUpInside" id="pOT-cV-6Nx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMV-3r-dCo">
@@ -432,8 +432,8 @@
                             <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="zUz-Ax-QTW" secondAttribute="trailing" constant="60" id="H1K-Hl-kqo"/>
                             <constraint firstItem="dMV-3r-dCo" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="104" id="JoS-hA-LUj"/>
                             <constraint firstItem="zUz-Ax-QTW" firstAttribute="top" secondItem="NeO-v8-tUO" secondAttribute="bottom" constant="10" id="MLI-CJ-s11"/>
-                            <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="bgi-nb-FdH" secondAttribute="trailing" constant="155" id="MUO-6C-Iik"/>
-                            <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="NeO-v8-tUO" secondAttribute="trailing" constant="155" id="VAa-7B-scb"/>
+                            <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="bgi-nb-FdH" secondAttribute="trailing" constant="100" id="MUO-6C-Iik"/>
+                            <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="NeO-v8-tUO" secondAttribute="trailing" constant="100" id="VAa-7B-scb"/>
                             <constraint firstItem="NeO-v8-tUO" firstAttribute="top" secondItem="8aJ-1m-F7t" secondAttribute="bottom" constant="60" id="ZM4-3N-ELC"/>
                             <constraint firstItem="dMV-3r-dCo" firstAttribute="top" secondItem="zUz-Ax-QTW" secondAttribute="bottom" constant="40" id="aZl-cn-igZ"/>
                             <constraint firstItem="8aJ-1m-F7t" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="151" id="dQu-Gg-jn4"/>
@@ -441,12 +441,12 @@
                             <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="8aJ-1m-F7t" secondAttribute="trailing" constant="151" id="h3Q-6g-YVZ"/>
                             <constraint firstItem="bgi-nb-FdH" firstAttribute="top" secondItem="SCl-k5-1Ey" secondAttribute="top" constant="80" id="lB4-FQ-bws"/>
                             <constraint firstItem="tnL-dy-mKW" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="87" id="oY0-qR-4fR"/>
-                            <constraint firstItem="NeO-v8-tUO" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="155" id="osm-eQ-adK"/>
-                            <constraint firstItem="bgi-nb-FdH" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="155" id="vJf-UV-asX"/>
+                            <constraint firstItem="NeO-v8-tUO" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="100" id="osm-eQ-adK"/>
+                            <constraint firstItem="bgi-nb-FdH" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="100" id="vJf-UV-asX"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="userImageView" destination="tnL-dy-mKW" id="8N6-FT-bc3"/>
+                        <outlet property="userImageView" destination="tnL-dy-mKW" id="IEE-Da-HfO"/>
                         <outlet property="userNameTextField" destination="zUz-Ax-QTW" id="gb2-vw-v58"/>
                     </connections>
                 </viewController>

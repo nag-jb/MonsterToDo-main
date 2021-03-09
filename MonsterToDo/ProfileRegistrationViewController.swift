@@ -13,10 +13,17 @@ class ProfileRegistrationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var userNameTextField: UITextField!
     
     
+    
     var saveData: UserDefaults = UserDefaults.standard
 
+    let userPhoto = ["heroMan.png", "heroWoman.png", "kenja.png", "salary.png", "daran.png", "boxer.png", "jk.png", "kid.png", ]
+    var changeImgNo = 0
+    var photo: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userImageView.image = UIImage(named: "heroMan.png")
         
         userNameTextField.delegate = self
 
@@ -26,17 +33,39 @@ class ProfileRegistrationViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Changeボタン
     @IBAction func change(){
-        
+        if changeImgNo == 0 {
+            changeImgNo = 1
+        }else if changeImgNo == 1 {
+            changeImgNo = 2
+        }else if changeImgNo == 2 {
+            changeImgNo = 3
+        }else if changeImgNo == 3 {
+            changeImgNo = 4
+        }else if changeImgNo == 4 {
+            changeImgNo = 5
+        }else if changeImgNo == 5 {
+            changeImgNo = 6
+        }else if changeImgNo == 6 {
+            changeImgNo = 7
+        }else if changeImgNo == 7 {
+            changeImgNo = 0
+        }
+        let photoName = userPhoto[changeImgNo]
+        userImageView.image = UIImage(named: photoName)
+        photo = UIImage(named: photoName)
     }
     
     
     //MARK: - saveボタン
     @IBAction func save(){
         
+        //UIImageをData型へ変換
+        let data = photo.pngData() as NSData?
         
         
+        //userDefaultsへ保存
         saveData.set(userNameTextField.text, forKey: "userName")
-        //saveData.set(userImageView, forKey: "userImage")
+        saveData.set(data, forKey: "userImage")
         saveData.synchronize()
         
         //alertを出す

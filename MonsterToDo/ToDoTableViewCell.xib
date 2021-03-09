@@ -39,13 +39,10 @@
                         <color key="textColor" systemColor="systemRedColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gpm-xF-zHt">
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gpm-xF-zHt">
                         <rect key="frame" x="255" y="5" width="60" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="Button" image="sord.png"/>
-                        <connections>
-                            <action selector="fight" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vkR-9o-Wah"/>
-                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yyyy/MM/dd HH:mm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fbn-BI-qDb">
                         <rect key="frame" x="90" y="29" width="135" height="13"/>
@@ -59,7 +56,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="dateLabel" destination="Fbn-BI-qDb" id="pLc-P7-1Rd"/>
-                <outlet property="fightButton" destination="Gpm-xF-zHt" id="8QF-v1-BQL"/>
+                <outlet property="fightButton" destination="Gpm-xF-zHt" id="pLN-9y-Bdk"/>
                 <outlet property="heartImageView" destination="Ybp-Yy-p9k" id="4td-Mx-zIo"/>
                 <outlet property="lifeLabel" destination="W2j-QL-fh0" id="C8j-aU-Jum"/>
                 <outlet property="monImageView" destination="hKp-Qd-Pu1" id="ivb-zd-wV5"/>

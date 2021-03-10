@@ -55,6 +55,7 @@ class ProfileRegistrationViewController: UIViewController, UITextFieldDelegate {
         }
         let photoName = userPhoto[changeImgNo]
         userImageView.image = UIImage(named: photoName)
+        //変数に画像を格納
         photo = UIImage(named: photoName)
     }
     
@@ -62,20 +63,26 @@ class ProfileRegistrationViewController: UIViewController, UITextFieldDelegate {
     //MARK: - saveボタン
     @IBAction func save(){
         
-        //UIImageをData型へ変換
-        let data = photo.pngData() as NSData?
+        if photo != nil{
+            //UIImageをData型へ変換
+            let data = photo.pngData() as NSData?
         
-        
-        //userDefaultsへ保存
-        saveData.set(userNameTextField.text, forKey: "userName")
-        saveData.set(data, forKey: "userImage")
-        saveData.synchronize()
-        
-        //alertを出す
-        let alert: UIAlertController = UIAlertController(title: "保存", message: "プロフィールが更新されました", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in self.dismiss(animated: true, completion: nil)}))
-        present(alert, animated: true, completion: nil)
+            //userDefaultsへ保存
+            saveData.set(userNameTextField.text, forKey: "userName")
+            saveData.set(data, forKey: "userImage")
+            saveData.synchronize()
+            
+            //alertを出す
+            let alert: UIAlertController = UIAlertController(title: "保存", message: "プロフィールが更新されました", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in self.dismiss(animated: true, completion: nil)}))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+//MARK: - cancelボタン
+    @IBAction func cancel(){
+        dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Returnボタンでキーボード非表示

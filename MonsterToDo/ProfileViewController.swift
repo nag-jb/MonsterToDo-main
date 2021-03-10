@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var colletctionViewFlowLayout: UICollectionViewFlowLayout!
     
     
-    let image = ["monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg", "monster.jpg"]
+    let image = ["monster.jpg", "dragon.png", "slime.png", "monster.jpg", "monster.jpg", "slime.png", "monster.jpg",]
     
     
     

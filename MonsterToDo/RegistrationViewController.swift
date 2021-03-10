@@ -25,6 +25,8 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     let levelList: [String] = ["Easy", "Normal", "Hard"]
     
     var monsterImage: UIImage!
+    var changeImageNo = 0
+    let image = ["slime.png", "monster.jpg", "dragon.png"]
     
     //ユーザデフォルトにアクセスするための倉庫を作成
     var saveDate: UserDefaults = UserDefaults.standard
@@ -140,6 +142,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         }
     }
     
+    
     //UIPickerViewの最初の表示
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == genrePickerView{
@@ -155,17 +158,23 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
             genreTextField.text = genreList[row]
            
         }else{
-            levelTextField.text = levelList[row]
-            
-            //難易度毎にモンスター画像を変更
-            if levelList.firstIndex(of: "easy") != nil {
-                monsterImage = UIImage(named: "slime.png")
-            }else if levelList.firstIndex(of: "normal") != nil {
-                monsterImage = UIImage(named: "monster.jpg")
-            }else {
-                monsterImage = UIImage(named: "dragon.png")
-            }
+            self.levelTextField.text = levelList[row]
         }
+        var hoge = "a"
+        
+        //難易度毎にモンスター画像を変更
+        if levelTextField.text == levelList[0] {
+            changeImageNo = 0
+            hoge = "slime"
+        }else if levelTextField.text == levelList[1]{
+            changeImageNo = 1
+            hoge = "monster"
+        }else {
+            changeImageNo = 2
+            hoge = "dragon"
+        }
+        monsterImage = UIImage(named: image[changeImageNo])
+        print(hoge)
     }
     
 //MARK: - キーボードが隠れないようにする
@@ -195,7 +204,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     }
     
     
-    //MARK: - ボタン
+    //MARK: - saveボタン
     @IBAction func save(){
         
         //タスク名を変数に格納、その後フィールドを空にする
@@ -209,6 +218,8 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         //難易度を変数に格納、その後フィールドを空にする
         todoLevel.append(levelTextField.text!)
         levelTextField.text = ""
+        //難易度にあったモンスタ画像を格納
+        sendSaveImage()
         
         
         todoDate.append(dateTextField.text!)
@@ -229,7 +240,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         saveDate.set(todoMemo, forKey: "memo")
         saveDate.set(todoMonster, forKey: "monster")
         
-        
+        saveDate.synchronize()
         
         //画面を閉じる
         self.dismiss(animated: true, completion: nil)
@@ -240,6 +251,18 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     @IBAction func cancel(){
         self.dismiss(animated: true, completion: nil)
     }
+    
+//MARK: - 画像保存
+    func sendSaveImage(){
+        //NSDate型にキャスト
+        let data = monsterImage.pngData() as NSData?
+        if let imageData = data {
+            todoMonster.append(imageData)
+            saveDate.set(todoMonster, forKey: "monster")
+            print("画像保存完了")
+            
+        }
+    }
 
 //MARK: - ボタン効果
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
@@ -248,6 +271,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         }
         return true
     }
+    
     
     //MARK: - キーボード非表示機能
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{

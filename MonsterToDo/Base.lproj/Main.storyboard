@@ -282,7 +282,7 @@
                                                 </imageView>
                                             </subviews>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="120" height="120"/>
                                     </collectionViewCell>
                                 </cells>
@@ -425,10 +425,25 @@
                                     <action selector="save" destination="emO-c3-Pd2" eventType="touchUpInside" id="XiK-gP-K7w"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0n-2D-SF0">
+                                <rect key="frame" x="147" y="700" width="120" height="33.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="k0n-2D-SF0" secondAttribute="height" multiplier="18:5" id="vMK-vJ-XNE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="戻る" backgroundImage="005_b.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel" destination="emO-c3-Pd2" eventType="touchUpInside" id="JvM-vz-eyW"/>
+                                    <action selector="save" destination="emO-c3-Pd2" eventType="touchUpInside" id="yYO-EP-HSH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SCl-k5-1Ey"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="k0n-2D-SF0" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="147" id="89S-Rp-NnF"/>
                             <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="tnL-dy-mKW" secondAttribute="trailing" constant="87" id="D04-w3-QCx"/>
                             <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="dMV-3r-dCo" secondAttribute="trailing" constant="103" id="Em6-pQ-paw"/>
                             <constraint firstItem="zUz-Ax-QTW" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="60" id="FdH-1K-nJG"/>
@@ -443,9 +458,11 @@
                             <constraint firstItem="8aJ-1m-F7t" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="151" id="dQu-Gg-jn4"/>
                             <constraint firstItem="tnL-dy-mKW" firstAttribute="top" secondItem="bgi-nb-FdH" secondAttribute="bottom" constant="5" id="gGc-w5-s5l"/>
                             <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="8aJ-1m-F7t" secondAttribute="trailing" constant="151" id="h3Q-6g-YVZ"/>
+                            <constraint firstItem="k0n-2D-SF0" firstAttribute="top" secondItem="dMV-3r-dCo" secondAttribute="bottom" constant="10" id="ifG-Vz-n6O"/>
                             <constraint firstItem="bgi-nb-FdH" firstAttribute="top" secondItem="SCl-k5-1Ey" secondAttribute="top" constant="80" id="lB4-FQ-bws"/>
                             <constraint firstItem="tnL-dy-mKW" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="87" id="oY0-qR-4fR"/>
                             <constraint firstItem="NeO-v8-tUO" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="100" id="osm-eQ-adK"/>
+                            <constraint firstItem="SCl-k5-1Ey" firstAttribute="trailing" secondItem="k0n-2D-SF0" secondAttribute="trailing" constant="147" id="p9d-3p-8Wc"/>
                             <constraint firstItem="bgi-nb-FdH" firstAttribute="leading" secondItem="SCl-k5-1Ey" secondAttribute="leading" constant="100" id="vJf-UV-asX"/>
                         </constraints>
                     </view>
@@ -512,9 +529,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

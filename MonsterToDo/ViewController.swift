@@ -13,7 +13,7 @@ var todoGenre = [String]()
 var todoLevel = [String]()
 var todoDate = [String]()
 var todoMemo = [String]()
-var todoMonster = [UIImageView]()
+var todoMonster = [NSData]()
 
 class ViewController: UIViewController, UITableViewDataSource {
     
@@ -37,9 +37,18 @@ class ViewController: UIViewController, UITableViewDataSource {
         if UserDefaults.standard.object(forKey: "quest") != nil {
             todoQuest = UserDefaults.standard.object(forKey: "quest") as! [String]
             todoDate = UserDefaults.standard.object(forKey: "date") as! [String]
-            //todoMonster = UserDefaults.standard.object(forKey: "monster") as! [UIImageView]
+            todoGenre = UserDefaults.standard.object(forKey: "genre") as! [String]
+            todoLevel = UserDefaults.standard.object(forKey: "level") as! [String]
+            todoMemo = UserDefaults.standard.object(forKey: "memo") as! [String]
+            let photoData = UserDefaults.standard.object(forKey: "monster") as! [Data]
             
+            todoMonster.removeAll()
+            for data in photoData {
+                print(data)
+                todoMonster.append(data as NSData)
+            }
         }
+        table.reloadData()
         
         print(todoQuest)
         print(todoGenre)
@@ -79,7 +88,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         cell.questLabel.text = todoQuest[indexPath.row]
         cell.dateLabel.text = todoDate[indexPath.row]
-        //cell.monImageView = todoMonster[indexPath.row]
+        cell.monImageView.image = UIImage(data: todoMonster[indexPath.row] as Data)
         
         print(todoQuest)
         print(todoGenre)
@@ -130,15 +139,29 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
         let okAction = UIAlertAction(title: "任務完了", style: .default, handler: {(action: UIAlertAction!) in
+            
             todoQuest.remove(at: indexPath.row)
             todoDate.remove(at: indexPath.row)
+            todoGenre.remove(at: indexPath.row)
+            todoLevel.remove(at: indexPath.row)
+            todoMemo.remove(at: indexPath.row)
+            todoMonster.remove(at: indexPath.row)
+            
             self.table.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
             //userDefaultsへ書込
             UserDefaults.standard.set(todoQuest, forKey: "quest")
             UserDefaults.standard.set(todoDate, forKey: "date")
+            UserDefaults.standard.set(todoGenre, forKey: "genre")
+            UserDefaults.standard.set(todoLevel, forKey: "level")
+            UserDefaults.standard.set(todoMemo, forKey: "memo")
+            UserDefaults.standard.set(todoMonster, forKey: "monster")
+            
             
             print(todoQuest)
             print(todoDate)
+            print(todoGenre)
+            print(todoLevel)
+            print(todoMemo)
         })
         
         alertController.addAction(cancelAction)

@@ -364,7 +364,7 @@
                     <connections>
                         <outlet property="collectionView" destination="FGT-PE-jGl" id="JRv-iY-pDN"/>
                         <outlet property="colletctionViewFlowLayout" destination="KGB-XY-hLG" id="8US-d3-ISW"/>
-                        <outlet property="userExp" destination="D5R-2Q-pxi" id="Inq-MS-FNA"/>
+                        <outlet property="userExp" destination="D5R-2Q-pxi" id="tSe-xa-6Rk"/>
                         <outlet property="userImageView" destination="cBh-bI-Diq" id="nbb-zX-Zfo"/>
                         <outlet property="userName" destination="sFk-MC-0DF" id="IrG-h5-o6H"/>
                     </connections>

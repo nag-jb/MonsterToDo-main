@@ -15,8 +15,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var userName: UILabel!
     @IBOutlet var userExp: UILabel!
     
-    
-    
     //図鑑
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var colletctionViewFlowLayout: UICollectionViewFlowLayout!
@@ -25,17 +23,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     let image = ["monster.jpg", "dragon.png","monster.jpg", "slime.png"]
     
     
-    
 //MARK: - ロード時に呼び出される処理
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = self
-        
-        userImageView.image = UIImage(named: "heroMan.png")
-        
-        userExp.text = String(exp)
-        
+        collectionView.dataSource = self        
         
         //レイアウト設定
         let layout = UICollectionViewFlowLayout()
@@ -43,16 +35,21 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
         collectionView.collectionViewLayout = layout
-
-        // Do any additional setup after loading the view.
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let _ = UserDefaults.standard.object(forKey: "userName") as? String{
+        
+        //経験値
+        if let _ = UserDefaults.standard.object(forKey: "userExp") as? String {
+            userExp.text = (UserDefaults.standard.object(forKey: "userExp") as! String)
+        }
+        //名前
+        if let _ = UserDefaults.standard.object(forKey: "userName") as? String {
             userName.text = (UserDefaults.standard.object(forKey: "userName") as! String)
         }
+        //画像
         if UserDefaults.standard.object(forKey: "userImage") != nil {
             let photoData = (UserDefaults.standard.data(forKey: "userImage"))
             userImageView.image = UIImage(data: photoData! as Data)

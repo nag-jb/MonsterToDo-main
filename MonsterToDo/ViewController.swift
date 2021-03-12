@@ -11,12 +11,13 @@ import UIKit
 var todoQuest = [String]()
 var todoGenre = [String]()
 var todoLevel = [String]()
-var todoExp = [String]()
+var todoExp = [Int]()
 var todoDate = [String]()
 var todoMemo = [String]()
 var todoMonster = [NSData]()
 
 var exp = 100
+var expTotal = ""
 
 class ViewController: UIViewController, UITableViewDataSource {
     
@@ -42,6 +43,7 @@ class ViewController: UIViewController, UITableViewDataSource {
             todoDate = UserDefaults.standard.object(forKey: "date") as! [String]
             todoGenre = UserDefaults.standard.object(forKey: "genre") as! [String]
             todoLevel = UserDefaults.standard.object(forKey: "level") as! [String]
+            todoExp = UserDefaults.standard.array(forKey: "exp") as! [Int]
             todoMemo = UserDefaults.standard.object(forKey: "memo") as! [String]
             let photoData = UserDefaults.standard.object(forKey: "monster") as! [Data]
             
@@ -56,8 +58,10 @@ class ViewController: UIViewController, UITableViewDataSource {
         print(todoQuest)
         print(todoGenre)
         print(todoLevel)
+        print(todoExp)
         print(todoDate)
         print(todoMemo)
+        print("現在のexp：\(exp)")
     }
     
     
@@ -91,13 +95,16 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         cell.questLabel.text = todoQuest[indexPath.row]
         cell.dateLabel.text = todoDate[indexPath.row]
+        cell.lifeLabel.text = String(todoExp[indexPath.row])
         cell.monImageView.image = UIImage(data: todoMonster[indexPath.row] as Data)
         
         print(todoQuest)
         print(todoGenre)
         print(todoLevel)
+        print(todoExp)
         print(todoDate)
         print(todoMemo)
+        print("現在のexp：\(exp)")
         
         return cell
     }
@@ -119,20 +126,26 @@ class ViewController: UIViewController, UITableViewDataSource {
             //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
             let okAction = UIAlertAction(title: "はい", style: .default, handler: {(action: UIAlertAction!) in
                 
+                //expを-10減らす
+                exp -= 10
+                expTotal = String(describing: exp)
+                //userDefaultsへ保存
+                UserDefaults.standard.set(expTotal, forKey: "userExp")
+                
                 //確認alert表示
-                self.alert()
+                self.alertExpHeru()
                 
                 //クエストを削除
                 todoQuest.remove(at: indexPath.row)
                 todoDate.remove(at: indexPath.row)
+                todoExp.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
                 //userDefaultsへ書込
                 UserDefaults.standard.set(todoQuest, forKey: "quest")
                 UserDefaults.standard.set(todoDate, forKey: "date")
+                UserDefaults.standard.set(todoExp, forKey: "exp")
                 UserDefaults.standard.set(todoMonster, forKey: "monster")
                 
-                //expを-10減らす
-                exp -= 10
                 
             })
             alertController.addAction(cancelAction)
@@ -146,7 +159,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
         
-    func alert(){
+    func alertExpHeru(){
         
         //alertのタイトル、本文部分を作成
         let alert: UIAlertController = UIAlertController(title: "クエスト削除", message: "expが10減りました", preferredStyle: .alert)
@@ -171,13 +184,27 @@ class ViewController: UIViewController, UITableViewDataSource {
         //アクション：ボタンの文字、ボタンスタイル、ボタンを押した時の処理を設定
         let cancelAction = UIAlertAction(title: "苦戦中...", style: .cancel, handler: nil)
         
-        //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
+        //タスクが完了したらTableViewから該当タスクを消去
         let okAction = UIAlertAction(title: "任務完了", style: .default, handler: {(action: UIAlertAction!) in
+            
+            //expを獲得
+            exp += todoExp[indexPath.row]
+            expTotal = String(describing: exp)
+            //userDefaultsへ保存
+            UserDefaults.standard.set(expTotal, forKey: "userExp")
+            
+            //alertのタイトル、本文部分を作成
+            let alert: UIAlertController = UIAlertController(title: " クエスト完了", message: "expを獲得しました", preferredStyle: .alert)
+            //alertのボタン部分を設定
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in self.dismiss(animated: true, completion: nil)}))
+            //alert表示
+            self.present(alert, animated: true, completion: nil)
             
             todoQuest.remove(at: indexPath.row)
             todoDate.remove(at: indexPath.row)
             todoGenre.remove(at: indexPath.row)
             todoLevel.remove(at: indexPath.row)
+            todoExp.remove(at: indexPath.row)
             todoMemo.remove(at: indexPath.row)
             todoMonster.remove(at: indexPath.row)
             
@@ -187,6 +214,7 @@ class ViewController: UIViewController, UITableViewDataSource {
             UserDefaults.standard.set(todoDate, forKey: "date")
             UserDefaults.standard.set(todoGenre, forKey: "genre")
             UserDefaults.standard.set(todoLevel, forKey: "level")
+            UserDefaults.standard.set(todoExp, forKey: "exp")
             UserDefaults.standard.set(todoMemo, forKey: "memo")
             UserDefaults.standard.set(todoMonster, forKey: "monster")
             
@@ -195,7 +223,9 @@ class ViewController: UIViewController, UITableViewDataSource {
             print(todoDate)
             print(todoGenre)
             print(todoLevel)
+            print(todoExp)
             print(todoMemo)
+            print("現在のexp：\(exp)")
         })
         
         alertController.addAction(cancelAction)
@@ -204,7 +234,6 @@ class ViewController: UIViewController, UITableViewDataSource {
         self.present(alertController, animated: true, completion: nil)
         print("pushed Button")
     }
-    
 
 }
 

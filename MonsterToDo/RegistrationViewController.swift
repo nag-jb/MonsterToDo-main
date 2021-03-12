@@ -26,6 +26,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     
     var monsterImage: UIImage!
     var changeImageNo = 0
+    var changeExp = 0
     let image = ["slime.png", "monster.jpg", "dragon.png"]
     
     //ユーザデフォルトにアクセスするための倉庫を作成
@@ -156,25 +157,41 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == genrePickerView{
             genreTextField.text = genreList[row]
-           
+            
+            
+            var hoge = "a"
+            //ジャンル毎にモンスター画像を変更
+            if genreTextField.text == genreList[0] {
+                changeImageNo = 0
+                hoge = "slime"
+            }else if genreTextField.text == genreList[1]{
+                changeImageNo = 1
+                hoge = "monster"
+            }else {
+                changeImageNo = 2
+                hoge = "dragon"
+            }
+            monsterImage = UIImage(named: image[changeImageNo])
+            print(hoge)
+            
         }else{
-            self.levelTextField.text = levelList[row]
+            levelTextField.text = levelList[row]
+            
+            var hogehoge = "b"
+            //レベル毎にexpを変更
+            if levelTextField.text == levelList[0] {
+                changeExp = 5
+                hogehoge = "exp 5"
+            }else if levelTextField.text == levelList[1]{
+                changeExp = 30
+                hogehoge = "exp 10"
+            }else {
+                changeExp = 50
+                hogehoge = "exp 50"
+            }
+            print(hogehoge)
         }
-        var hoge = "a"
         
-        //難易度毎にモンスター画像を変更
-        if levelTextField.text == levelList[0] {
-            changeImageNo = 0
-            hoge = "slime"
-        }else if levelTextField.text == levelList[1]{
-            changeImageNo = 1
-            hoge = "monster"
-        }else {
-            changeImageNo = 2
-            hoge = "dragon"
-        }
-        monsterImage = UIImage(named: image[changeImageNo])
-        print(hoge)
     }
     
 //MARK: - キーボードが隠れないようにする
@@ -214,12 +231,16 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         //ジャンルを変数に格納、その後フィールドを空にする
         todoGenre.append(genreTextField.text!)
         genreTextField.text = ""
+        //ジャンルにあったモンスタ画像を格納
+        sendSaveImage()
         
         //難易度を変数に格納、その後フィールドを空にする
         todoLevel.append(levelTextField.text!)
         levelTextField.text = ""
-        //難易度にあったモンスタ画像を格納
-        sendSaveImage()
+        //難易度にあった経験値を格納
+        todoExp.append(changeExp)
+        
+       
         
         
         todoDate.append(dateTextField.text!)
@@ -236,6 +257,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         saveDate.set(todoQuest, forKey: "quest")
         saveDate.set(todoGenre, forKey: "genre")
         saveDate.set(todoLevel, forKey: "level")
+        saveDate.set(todoExp, forKey: "exp")
         saveDate.set(todoDate, forKey: "date")
         saveDate.set(todoMemo, forKey: "memo")
         saveDate.set(todoMonster, forKey: "monster")

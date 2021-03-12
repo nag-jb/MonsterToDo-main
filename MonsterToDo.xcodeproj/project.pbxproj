@@ -38,6 +38,7 @@
 		1A7684B625F61B3700C1D9F3 /* 006.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7684B525F61B3600C1D9F3 /* 006.png */; };
 		1A7684BE25F61C9200C1D9F3 /* 004_b.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7684BD25F61C9200C1D9F3 /* 004_b.png */; };
 		1A7684C325F61D1C00C1D9F3 /* ProfileRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7684C225F61D1C00C1D9F3 /* ProfileRegistrationViewController.swift */; };
+		1A899E1325FA24DB00AE9E50 /* sougen_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A899E1225FA24DB00AE9E50 /* sougen_background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		1A7684B525F61B3600C1D9F3 /* 006.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 006.png; sourceTree = "<group>"; };
 		1A7684BD25F61C9200C1D9F3 /* 004_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 004_b.png; sourceTree = "<group>"; };
 		1A7684C225F61D1C00C1D9F3 /* ProfileRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRegistrationViewController.swift; sourceTree = "<group>"; };
+		1A899E1225FA24DB00AE9E50 /* sougen_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sougen_background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				1A76848025F3AD6200C1D9F3 /* sord.png */,
 				1A76848125F3AD6200C1D9F3 /* heart.png */,
 				1A76848225F3AD6200C1D9F3 /* quest_background.jpg */,
+				1A899E1225FA24DB00AE9E50 /* sougen_background.png */,
 				1A76848325F3AD6200C1D9F3 /* monster.jpg */,
 			);
 			path = image;
@@ -317,6 +320,7 @@
 				1A76848B25F3AD6200C1D9F3 /* quest_background.jpg in Resources */,
 				1A69165525F643840001439C /* kenja.png in Resources */,
 				1A69165325F643840001439C /* boxer.png in Resources */,
+				1A899E1325FA24DB00AE9E50 /* sougen_background.png in Resources */,
 				1A76848925F3AD6200C1D9F3 /* sord.png in Resources */,
 				1A69165625F643840001439C /* jk.png in Resources */,
 				1A76845325F3ABBF00C1D9F3 /* LaunchScreen.storyboard in Resources */,
@@ -536,15 +540,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7W99LDKFYV;
+				DEVELOPMENT_TEAM = GSSV7SDNWP;
 				INFOPLIST_FILE = MonsterToDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.tatsui.nagiwo.MonsterToDo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littech.release-montodo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -555,15 +561,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7W99LDKFYV;
+				DEVELOPMENT_TEAM = GSSV7SDNWP;
 				INFOPLIST_FILE = MonsterToDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.tatsui.nagiwo.MonsterToDo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littech.release-montodo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -575,6 +583,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSSV7SDNWP;
 				INFOPLIST_FILE = MonsterToDoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -596,6 +605,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSSV7SDNWP;
 				INFOPLIST_FILE = MonsterToDoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -616,6 +626,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSSV7SDNWP;
 				INFOPLIST_FILE = MonsterToDoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -635,6 +646,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSSV7SDNWP;
 				INFOPLIST_FILE = MonsterToDoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

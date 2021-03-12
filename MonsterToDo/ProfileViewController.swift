@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     //プロフィール
@@ -14,12 +15,14 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var userName: UILabel!
     @IBOutlet var userExp: UILabel!
     
+    
+    
     //図鑑
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var colletctionViewFlowLayout: UICollectionViewFlowLayout!
     
     
-    let image = ["monster.jpg", "dragon.png", "slime.png", "monster.jpg", "monster.jpg", "slime.png", "monster.jpg",]
+    let image = ["monster.jpg", "dragon.png","monster.jpg", "slime.png"]
     
     
     
@@ -30,6 +33,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionView.dataSource = self
         
         userImageView.image = UIImage(named: "heroMan.png")
+        
+        userExp.text = String(exp)
         
         
         //レイアウト設定
@@ -73,22 +78,16 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         return monster
     }
 
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         //sectionの数は1つ
         return 1
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //要素数を入れる、要素異常の数字を入れると表示でエラーになる
         return image.count
     }
     
-    
-    
-    
-
     /*
     // MARK: - Navigation
 

@@ -11,9 +11,12 @@ import UIKit
 var todoQuest = [String]()
 var todoGenre = [String]()
 var todoLevel = [String]()
+var todoExp = [String]()
 var todoDate = [String]()
 var todoMemo = [String]()
 var todoMonster = [NSData]()
+
+var exp = 100
 
 class ViewController: UIViewController, UITableViewDataSource {
     
@@ -105,21 +108,53 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
 //MARK: -スワイプしたセルの削除
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == UITableViewCell.EditingStyle.delete{
-//            todoQuest.remove(at: indexPath.row)
-//            todoDate.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
-//            //userDefaultsへ書込
-//            UserDefaults.standard.set(todoQuest, forKey: "quest")
-//            UserDefaults.standard.set(todoDate, forKey: "date")
-//            UserDefaults.standard.set(todoMonster, forKey: "monster")
-//        }
-//
-//        print("e")
-//        print(todoQuest)
-//        print(todoDate)
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete{
+            //アラートコントローラ：タイトル、メッセージ、アラートスタイルを設定
+            let alertController = UIAlertController(title: "クエストを辞退", message: "クエストを辞退しますか？(exp -10)", preferredStyle: .alert)
+            
+            //アクション：ボタンの文字、ボタンスタイル、ボタンを押した時の処理を設定
+            let cancelAction = UIAlertAction(title: "いいえ", style: .cancel, handler: nil)
+            
+            //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
+            let okAction = UIAlertAction(title: "はい", style: .default, handler: {(action: UIAlertAction!) in
+                
+                //確認alert表示
+                self.alert()
+                
+                //クエストを削除
+                todoQuest.remove(at: indexPath.row)
+                todoDate.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+                //userDefaultsへ書込
+                UserDefaults.standard.set(todoQuest, forKey: "quest")
+                UserDefaults.standard.set(todoDate, forKey: "date")
+                UserDefaults.standard.set(todoMonster, forKey: "monster")
+                
+                //expを-10減らす
+                exp -= 10
+                
+            })
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        }
+        
+        print("e")
+        print(todoQuest)
+        print(todoDate)
+    }
+    
+        
+    func alert(){
+        
+        //alertのタイトル、本文部分を作成
+        let alert: UIAlertController = UIAlertController(title: "クエスト削除", message: "expが10減りました", preferredStyle: .alert)
+        //alertのボタン部分を設定
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in self.dismiss(animated: true, completion: nil)}))
+        //alert表示
+        present(alert, animated: true, completion: nil)
+        }
     
     //MARK: - タスク完了アクション
     //タスクの完了を設定
@@ -135,7 +170,6 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         //アクション：ボタンの文字、ボタンスタイル、ボタンを押した時の処理を設定
         let cancelAction = UIAlertAction(title: "苦戦中...", style: .cancel, handler: nil)
-        
         
         //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
         let okAction = UIAlertAction(title: "任務完了", style: .default, handler: {(action: UIAlertAction!) in

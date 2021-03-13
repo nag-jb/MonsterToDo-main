@@ -8,6 +8,7 @@
 import UIKit
 
 
+
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     //プロフィール
@@ -18,8 +19,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     //図鑑
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var colletctionViewFlowLayout: UICollectionViewFlowLayout!
-//    var colImage = [String]()
-//    var colLabel: [NSData]()
+    var endQuest = [String]()
+    var endMonster = [NSData]()
+
     
     
     let image = ["monster.jpg", "dragon.png","monster.jpg", "slime.png"]
@@ -40,32 +42,37 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
         collectionView.collectionViewLayout = layout
+        
+        //図鑑情報
+        //画像
+//        if saveDate.object(forKey: "endQuest") != nil {
+//            endQuest = saveDate.object(forKey: "endQuest") as! [String]
+//            //endMonster = saveDate.object(forKey: "endMonster") as! [NSData]
+//
+//            print(endQuest)
+            
+//        }
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         //プロフィール情報
         //経験値
         if let _ = saveDate.object(forKey: "userExp") as? String {
-            userExp.text = (UserDefaults.standard.object(forKey: "userExp") as! String)
+            userExp.text = (saveDate.object(forKey: "userExp") as! String)
         }
         //名前
         if let _ = saveDate.object(forKey: "userName") as? String {
-            userName.text = (UserDefaults.standard.object(forKey: "userName") as! String)
+            userName.text = (saveDate.object(forKey: "userName") as! String)
         }
         //画像
         if saveDate.object(forKey: "userImage") != nil {
-            let photoData = (UserDefaults.standard.data(forKey: "userImage"))
+            let photoData = (saveDate.data(forKey: "userImage"))
             userImageView.image = UIImage(data: photoData! as Data)
         }
         
-        //図鑑情報
-//        //画像
-//        if saveDate.object(forKey: "monster") != nil {
-//            colImage = 
-//        }
     }
     
 //MARK: - プロフィール
@@ -76,13 +83,14 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         let monster: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "monster", for: indexPath)
         
         //tag番号を使ってImageViewのインスタンス生成
-        let ImageView = monster.contentView.viewWithTag(1) as! UIImageView
+        //let ImageView = monster.contentView.viewWithTag(1) as! UIImageView
+        //let Label = monster.contentView.viewWithTag(2) as! UILabel
         
         //画像配列の番号で指定された要素の名前の画像をUIImageとする
-        let cellImage = UIImage(named: image[indexPath.row])
+        //ImageView.image = UIImage(data: endMonster[indexPath.row] as Data)
+        //ImageView.image = UIImage(named: image[indexPath.row])
+        //Label.text = endQuest[indexPath.row]
         
-        //UIImageをUIImageViewのimageとして設定
-        ImageView.image = cellImage
         
         return monster
     }

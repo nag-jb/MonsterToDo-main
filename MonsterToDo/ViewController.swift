@@ -107,6 +107,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.lifeLabel.text = String(todoExp[indexPath.row])
         cell.monImageView.image = UIImage(data: todoMonster[indexPath.row] as Data)
         
+        if todoGenre[indexPath.row] == "課題" {
+            cell.contentView.backgroundColor = UIColor(red: 255 / 255, green: 191 /  255, blue: 166 / 255, alpha: 0.8)
+        }else if todoGenre[indexPath.row] == "テスト" {
+            cell.contentView.backgroundColor = UIColor(red: 255 / 255, green: 247 /  255, blue: 147 / 255, alpha: 0.5)
+        }else{
+            cell.contentView.backgroundColor = UIColor.white
+        }
+        
         print(todoQuest)
         print(todoGenre)
         print(todoLevel)
@@ -156,8 +164,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             questVC.level = nextLevel
             questVC.date = nextDate
             questVC.memo = nextMemo
-            
-        
         }
     }
     
@@ -165,45 +171,57 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //MARK: - タスクの削除アクション
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete{
-            //アラートコントローラ：タイトル、メッセージ、アラートスタイルを設定
-            let alertController = UIAlertController(title: "クエストを辞退", message: "クエストを辞退しますか？(exp -10)", preferredStyle: .alert)
-            
-            //アクション：ボタンの文字、ボタンスタイル、ボタンを押した時の処理を設定
-            let cancelAction = UIAlertAction(title: "いいえ", style: .cancel, handler: nil)
-            
-            //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
-            let okAction = UIAlertAction(title: "はい", style: .default, handler: {(action: UIAlertAction!) in
+            if exp >= 10 {
+                //アラートコントローラ：タイトル、メッセージ、アラートスタイルを設定
+                let alertController = UIAlertController(title: "クエストを辞退", message: "クエストを辞退しますか？(exp -10)", preferredStyle: .alert)
                 
-                //expを-10減らす
-                exp -= 10
-                expTotal = String(describing: exp)
-                //userDefaultsへ保存
-                UserDefaults.standard.set(expTotal, forKey: "userExp")
+                //アクション：ボタンの文字、ボタンスタイル、ボタンを押した時の処理を設定
+                let cancelAction = UIAlertAction(title: "いいえ", style: .cancel, handler: nil)
                 
-                //確認alert表示
-                self.alertExpHeru()
+                //タスクが完了したらTableViewから該当タスクを消去、図鑑に登録
+                let okAction = UIAlertAction(title: "はい", style: .default, handler: {(action: UIAlertAction!) in
+                    
+                    //expを-10減らす
+                    exp -= 10
+                    expTotal = String(describing: exp)
+                    //userDefaultsへ保存
+                    self.saveDate.set(expTotal, forKey: "userExp")
+                    
+                    //確認alert表示
+                    self.alertExpHeru()
+                    
+                    //クエストを削除
+                    todoQuest.remove(at: indexPath.row)
+                    todoGenre.remove(at: indexPath.row)
+                    todoLevel.remove(at: indexPath.row)
+                    todoDate.remove(at: indexPath.row)
+                    todoMemo.remove(at: indexPath.row)
+                    todoMonster.remove(at: indexPath.row)
+                    
+                    todoExp.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+                    //userDefaultsへ書込
+                    self.saveDate.set(todoQuest, forKey: "quest")
+                    self.saveDate.set(todoGenre, forKey: "genre")
+                    self.saveDate.set(todoLevel, forKey: "level")
+                    self.saveDate.set(todoDate, forKey: "date")
+                    self.saveDate.set(todoExp, forKey: "exp")
+                    self.saveDate.set(todoMonster, forKey: "monster")
+                })
+                alertController.addAction(cancelAction)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                print("e")
+                print(todoQuest)
+                print(todoDate)
+            }else{
+                //alertを出す
+                let alert: UIAlertController = UIAlertController(title: "削除できません", message: "expが足りないため削除できません", preferredStyle: .alert)
                 
-                //クエストを削除
-                todoQuest.remove(at: indexPath.row)
-                todoDate.remove(at: indexPath.row)
-                todoExp.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
-                //userDefaultsへ書込
-                UserDefaults.standard.set(todoQuest, forKey: "quest")
-                UserDefaults.standard.set(todoDate, forKey: "date")
-                UserDefaults.standard.set(todoExp, forKey: "exp")
-                UserDefaults.standard.set(todoMonster, forKey: "monster")
-                
-                
-            })
-            alertController.addAction(cancelAction)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in self.dismiss(animated: true, completion: nil)}))
+                present(alert, animated: true, completion: nil)
+            }
         }
-        
-        print("e")
-        print(todoQuest)
-        print(todoDate)
     }
     
     
@@ -240,7 +258,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             exp += todoExp[indexPath.row]
             expTotal = String(describing: exp)
             //userDefaultsへ保存
-            UserDefaults.standard.set(expTotal, forKey: "userExp")
+            self.saveDate.set(expTotal, forKey: "userExp")
             
             //alertのタイトル、本文部分を作成
             let alert: UIAlertController = UIAlertController(title: " クエスト完了", message: "expを獲得しました", preferredStyle: .alert)
@@ -248,6 +266,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in self.dismiss(animated: true, completion: nil)}))
             //alert表示
             self.present(alert, animated: true, completion: nil)
+            
+            //collectionViewへ情報を渡す
+//            let endQ = todoQuest[indexPath.row]
+            //let endM = todoMonster[indexPath.row]
+            self.saveDate.set(todoQuest[indexPath.row], forKey: "endQuest")
+            //self.saveDate.set(endM, forKey: "endMonster")
+            
+//            print("endQ = \(endQ)")
+            //print("endM = \(endM)")
+            
             
             
             //tableCellから削除
@@ -261,13 +289,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             self.table.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
             //userDefaultsへ書込
-            UserDefaults.standard.set(todoQuest, forKey: "quest")
-            UserDefaults.standard.set(todoDate, forKey: "date")
-            UserDefaults.standard.set(todoGenre, forKey: "genre")
-            UserDefaults.standard.set(todoLevel, forKey: "level")
-            UserDefaults.standard.set(todoExp, forKey: "exp")
-            UserDefaults.standard.set(todoMemo, forKey: "memo")
-            UserDefaults.standard.set(todoMonster, forKey: "monster")
+            self.saveDate.set(todoQuest, forKey: "quest")
+            self.saveDate.set(todoDate, forKey: "date")
+            self.saveDate.set(todoGenre, forKey: "genre")
+            self.saveDate.set(todoLevel, forKey: "level")
+            self.saveDate.set(todoExp, forKey: "exp")
+            self.saveDate.set(todoMemo, forKey: "memo")
+            self.saveDate.set(todoMonster, forKey: "monster")
             
             
             print(todoQuest)

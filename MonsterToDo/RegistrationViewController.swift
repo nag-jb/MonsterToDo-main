@@ -157,40 +157,31 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == genrePickerView{
             genreTextField.text = genreList[row]
-            
-            
-            var hoge = "a"
-            //ジャンル毎にモンスター画像を変更
-            if genreTextField.text == genreList[0] {
-                changeImageNo = 0
-                hoge = "slime"
-            }else if genreTextField.text == genreList[1]{
-                changeImageNo = 1
-                hoge = "monster"
-            }else {
-                changeImageNo = 2
-                hoge = "dragon"
-            }
-            monsterImage = UIImage(named: image[changeImageNo])
-            print(hoge)
-            
         }else{
             levelTextField.text = levelList[row]
-            
+            var hoge = "a"
             var hogehoge = "b"
             //レベル毎にexpを変更
             if levelTextField.text == levelList[0] {
                 changeExp = 5
+                changeImageNo = 0
+                hoge = "slime"
                 hogehoge = "exp 5"
             }else if levelTextField.text == levelList[1]{
                 changeExp = 30
-                hogehoge = "exp 10"
+                changeImageNo = 1
+                hoge = "monster"
+                hogehoge = "exp 30"
             }else {
-                changeExp = 50
-                hogehoge = "exp 50"
+                changeExp = 100
+                changeImageNo = 2
+                hoge = "dragon"
+                hogehoge = "exp 100"
             }
+            print(hoge)
             print(hogehoge)
         }
+        monsterImage = UIImage(named: image[changeImageNo])
         
     }
     
@@ -231,14 +222,16 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate,  UIPick
         //ジャンルを変数に格納、その後フィールドを空にする
         todoGenre.append(genreTextField.text!)
         genreTextField.text = ""
-        //ジャンルにあったモンスタ画像を格納
-        sendSaveImage()
+        
         
         //難易度を変数に格納、その後フィールドを空にする
         todoLevel.append(levelTextField.text!)
         levelTextField.text = ""
         //難易度にあった経験値を格納
         todoExp.append(changeExp)
+        //ジャンルにあったモンスタ画像を格納
+        sendSaveImage()
+        print("exp\(changeExp)")
         
        
         

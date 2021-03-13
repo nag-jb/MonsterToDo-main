@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A43A35E25FBA4FE001BF019 /* QuestDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A43A35D25FBA4FE001BF019 /* QuestDetailsViewController.swift */; };
+		1A43A36325FCC8BB001BF019 /* quest_paper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1A43A36225FCC8BB001BF019 /* quest_paper.jpg */; };
 		1A69163725F63F1B0001439C /* heroWoman.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A69163625F63F1B0001439C /* heroWoman.png */; };
 		1A69165325F643840001439C /* boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A69164D25F643840001439C /* boxer.png */; };
 		1A69165425F643840001439C /* daran.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A69164E25F643840001439C /* daran.png */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A43A35D25FBA4FE001BF019 /* QuestDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestDetailsViewController.swift; sourceTree = "<group>"; };
+		1A43A36225FCC8BB001BF019 /* quest_paper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = quest_paper.jpg; sourceTree = "<group>"; };
 		1A69163625F63F1B0001439C /* heroWoman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heroWoman.png; sourceTree = "<group>"; };
 		1A69164D25F643840001439C /* boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boxer.png; sourceTree = "<group>"; };
 		1A69164E25F643840001439C /* daran.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daran.png; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 				1A76849625F3B9CC00C1D9F3 /* ToDoTableViewCell.xib */,
 				1A7684B025F4E7C900C1D9F3 /* ProfileViewController.swift */,
 				1A7684C225F61D1C00C1D9F3 /* ProfileRegistrationViewController.swift */,
+				1A43A35D25FBA4FE001BF019 /* QuestDetailsViewController.swift */,
 			);
 			path = MonsterToDo;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				1A76848025F3AD6200C1D9F3 /* sord.png */,
 				1A76848125F3AD6200C1D9F3 /* heart.png */,
 				1A76848225F3AD6200C1D9F3 /* quest_background.jpg */,
+				1A43A36225FCC8BB001BF019 /* quest_paper.jpg */,
 				1A899E1225FA24DB00AE9E50 /* sougen_background.png */,
 				1A76848325F3AD6200C1D9F3 /* monster.jpg */,
 			);
@@ -326,6 +332,7 @@
 				1A76845325F3ABBF00C1D9F3 /* LaunchScreen.storyboard in Resources */,
 				1A69165725F643840001439C /* kid.png in Resources */,
 				1A76845025F3ABBF00C1D9F3 /* Assets.xcassets in Resources */,
+				1A43A36325FCC8BB001BF019 /* quest_paper.jpg in Resources */,
 				1A7684B625F61B3700C1D9F3 /* 006.png in Resources */,
 				1A69165825F643840001439C /* salary.png in Resources */,
 				1A76844E25F3ABBE00C1D9F3 /* Main.storyboard in Resources */,
@@ -362,6 +369,7 @@
 				1A7684B125F4E7C900C1D9F3 /* ProfileViewController.swift in Sources */,
 				1A76844B25F3ABBE00C1D9F3 /* ViewController.swift in Sources */,
 				1A76844725F3ABBE00C1D9F3 /* AppDelegate.swift in Sources */,
+				1A43A35E25FBA4FE001BF019 /* QuestDetailsViewController.swift in Sources */,
 				1A76849125F3B70200C1D9F3 /* RegistrationViewController.swift in Sources */,
 				1A76844925F3ABBE00C1D9F3 /* SceneDelegate.swift in Sources */,
 				1A76849725F3B9CC00C1D9F3 /* ToDoTableViewCell.swift in Sources */,

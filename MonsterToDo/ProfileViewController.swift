@@ -18,9 +18,14 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     //図鑑
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var colletctionViewFlowLayout: UICollectionViewFlowLayout!
+//    var colImage = [String]()
+//    var colLabel: [NSData]()
     
     
     let image = ["monster.jpg", "dragon.png","monster.jpg", "slime.png"]
+    
+    //ユーザデフォルトにアクセスするための倉庫を作成
+    var saveDate: UserDefaults = UserDefaults.standard
     
     
 //MARK: - ロード時に呼び出される処理
@@ -41,25 +46,32 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        //プロフィール情報
         //経験値
-        if let _ = UserDefaults.standard.object(forKey: "userExp") as? String {
+        if let _ = saveDate.object(forKey: "userExp") as? String {
             userExp.text = (UserDefaults.standard.object(forKey: "userExp") as! String)
         }
         //名前
-        if let _ = UserDefaults.standard.object(forKey: "userName") as? String {
+        if let _ = saveDate.object(forKey: "userName") as? String {
             userName.text = (UserDefaults.standard.object(forKey: "userName") as! String)
         }
         //画像
-        if UserDefaults.standard.object(forKey: "userImage") != nil {
+        if saveDate.object(forKey: "userImage") != nil {
             let photoData = (UserDefaults.standard.data(forKey: "userImage"))
             userImageView.image = UIImage(data: photoData! as Data)
         }
+        
+        //図鑑情報
+//        //画像
+//        if saveDate.object(forKey: "monster") != nil {
+//            colImage = 
+//        }
     }
     
 //MARK: - プロフィール
     
 
-//MARK: - 図鑑
+//MARK: - 図鑑 collectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let monster: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "monster", for: indexPath)
         

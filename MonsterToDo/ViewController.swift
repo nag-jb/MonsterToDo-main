@@ -19,7 +19,13 @@ var todoMonster = [NSData]()
 var exp = 100
 var expTotal = ""
 
-class ViewController: UIViewController, UITableViewDataSource {
+var nextQuest: String!
+var nextGenre: String!
+var nextLevel: String!
+var nextDate: String!
+var nextMemo: String!
+
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //StoryBoardで扱うTableViewを宣言
     @IBOutlet var table: UITableView!
@@ -27,25 +33,29 @@ class ViewController: UIViewController, UITableViewDataSource {
     //ToDoタスクを表示するための配列
     var todoArray = [String]()
     
+    //ユーザデフォルトにアクセスするための倉庫を作成
+    var saveDate: UserDefaults = UserDefaults.standard
+    
 //MARK: - ロード時に呼び出される処理
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //テーブルビューのデータソースメソッドはViewControllerクラスに書くという宣言
         table.dataSource = self
+        table.delegate = self
         
         //カスタムセルを登録
         self.table.register(UINib(nibName: "ToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "questCell")
         configureTableView()
         
         if UserDefaults.standard.object(forKey: "quest") != nil {
-            todoQuest = UserDefaults.standard.object(forKey: "quest") as! [String]
-            todoDate = UserDefaults.standard.object(forKey: "date") as! [String]
-            todoGenre = UserDefaults.standard.object(forKey: "genre") as! [String]
-            todoLevel = UserDefaults.standard.object(forKey: "level") as! [String]
-            todoExp = UserDefaults.standard.array(forKey: "exp") as! [Int]
-            todoMemo = UserDefaults.standard.object(forKey: "memo") as! [String]
-            let photoData = UserDefaults.standard.object(forKey: "monster") as! [Data]
+            todoQuest = saveDate.object(forKey: "quest") as! [String]
+            todoDate = saveDate.object(forKey: "date") as! [String]
+            todoGenre = saveDate.object(forKey: "genre") as! [String]
+            todoLevel = saveDate.object(forKey: "level") as! [String]
+            todoExp = saveDate.array(forKey: "exp") as! [Int]
+            todoMemo = saveDate.object(forKey: "memo") as! [String]
+            let photoData = saveDate.object(forKey: "monster") as! [Data]
             
             todoMonster.removeAll()
             for data in photoData {
@@ -80,6 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     //セルの数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return todoQuest.count
+        
     }
     
     
@@ -88,10 +99,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questCell", for: indexPath) as! ToDoTableViewCell
         cell.fightButton.addTarget(self, action: #selector(ViewController.fight(_:)), for: .touchUpInside)
         
-        
         //ボタンにタグを設定
         cell.fightButton.tag = indexPath.row
-        
         
         cell.questLabel.text = todoQuest[indexPath.row]
         cell.dateLabel.text = todoDate[indexPath.row]
@@ -110,11 +119,50 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     
+    //セルの高さを指定
     func configureTableView(){
         table.rowHeight = 70
     }
     
-//MARK: -スワイプしたセルの削除
+    
+    //セル詳細画面への遷移
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        nextQuest = todoQuest[indexPath.row]
+        nextGenre = todoGenre[indexPath.row]
+        nextLevel = todoLevel[indexPath.row]
+        nextDate = todoDate[indexPath.row]
+        nextMemo = todoMemo[indexPath.row]
+        print("移動するよ")
+        
+        if nextQuest != nil{
+            print("移動するよ2")
+            //別の画面に遷移
+            performSegue(withIdentifier: "toDetails", sender: nextQuest)
+            
+        }
+    }
+   
+    //Segue実行前処理
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
+        //Segueの識別子確認
+        if segue.identifier == "toDetails" {
+            let questVC: QuestDetailsViewController = segue.destination as! QuestDetailsViewController
+            print("wow")
+            //遷移先ViewControllerの取得
+            questVC.quest = nextQuest
+            questVC.genre = nextGenre
+            questVC.level = nextLevel
+            questVC.date = nextDate
+            questVC.memo = nextMemo
+            
+        
+        }
+    }
+    
+    
+//MARK: - タスクの削除アクション
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete{
             //アラートコントローラ：タイトル、メッセージ、アラートスタイルを設定
@@ -158,7 +206,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         print(todoDate)
     }
     
-        
+    
+    //経験値増えましたよアラート
     func alertExpHeru(){
         
         //alertのタイトル、本文部分を作成
@@ -200,6 +249,8 @@ class ViewController: UIViewController, UITableViewDataSource {
             //alert表示
             self.present(alert, animated: true, completion: nil)
             
+            
+            //tableCellから削除
             todoQuest.remove(at: indexPath.row)
             todoDate.remove(at: indexPath.row)
             todoGenre.remove(at: indexPath.row)
